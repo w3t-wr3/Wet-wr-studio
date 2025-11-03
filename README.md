@@ -126,39 +126,6 @@ Open **http://localhost:5173** in your browser.
 - Add API keys to `.env.local` for providers like OpenAI, Anthropic, etc.
 - See `.env.example` for all supported providers
 
-### AI Prompt Preset (Optional)
-
-For the best experience with Wetware Studio, install our optimized AI prompt preset in your model's context window. This preset teaches your AI about WebContainer limitations, Next.js 15.1.0 requirements, and Wetware Studio's auto-fix capabilities.
-
-**📄 [View AI Prompt Preset](PROMPT_PRESET.md)**
-
-#### How to Install the Preset:
-
-**For AnythingLLM:**
-1. Copy the entire contents of [PROMPT_PRESET.md](PROMPT_PRESET.md)
-2. In AnythingLLM, go to your workspace settings
-3. Paste into the "System Prompt" field
-4. Save and start chatting
-
-**For LM Studio:**
-1. Copy the entire contents of [PROMPT_PRESET.md](PROMPT_PRESET.md)
-2. In LM Studio chat, click the system prompt icon (top right)
-3. Paste the preset content
-4. Save and continue your conversation
-
-**For Cloud Providers (OpenAI, Anthropic, etc.):**
-1. Copy the entire contents of [PROMPT_PRESET.md](PROMPT_PRESET.md)
-2. In your chat interface, add as a system message or context
-3. For ChatGPT: Use Custom Instructions in settings
-4. For Claude: Include at the start of your conversation
-
-**Benefits:**
-- AI automatically uses Next.js 15.1.0 (not 16+)
-- Knows to use `--legacy-peer-deps` for installations
-- Understands WebContainer limitations
-- Follows Wetware Studio best practices
-- Provides WebContainer-compatible solutions
-
 ### Usage
 
 1. **Import any project folder** via the UI
