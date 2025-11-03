@@ -1,15 +1,11 @@
 {
-  "name": "bolt",
-  "description": "An AI Agent",
-  "private": true,
+  "name": "bolt-diy",
+  "description": "Prompt, run, edit, and deploy full-stack web applications",
+  "private": false,
   "license": "MIT",
   "sideEffects": false,
   "type": "module",
   "version": "1.0.0",
-  "author": {
-    "name": "bolt.diy team",
-    "email": "maintainers@bolt.diy"
-  },
   "scripts": {
     "deploy": "npm run build && wrangler pages deploy",
     "build": "remix vite:build",

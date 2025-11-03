@@ -19,6 +19,7 @@ import GithubProvider from './providers/github';
 import MoonshotProvider from './providers/moonshot';
 
 export {
+  LMStudioProvider,
   AnthropicProvider,
   CohereProvider,
   DeepseekProvider,
@@ -35,7 +36,6 @@ export {
   PerplexityProvider,
   XAIProvider,
   TogetherProvider,
-  LMStudioProvider,
   AmazonBedrockProvider,
   GithubProvider,
 };

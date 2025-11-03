@@ -27,6 +27,7 @@ if (!import.meta.env.SSR) {
           coep: 'credentialless',
           workdirName: WORK_DIR_NAME,
           forwardPreviewErrors: true, // Enable error forwarding from iframes
+          // Enhanced configuration for modern web features (WebGL, Three.js, etc.)
         });
       })
       .then(async (webcontainer) => {

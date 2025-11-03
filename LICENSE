@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2024 StackBlitz, Inc. and bolt.diy contributors
+Copyright (c) 2024 Wetware
+
+Original work Copyright (c) 2024 Cole Medin and Contributors (bolt.diy)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +21,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+ATTRIBUTION NOTICE:
+
+This software is based on bolt.diy (https://github.com/stackblitz-labs/bolt.diy)
+originally created by Cole Medin and contributors.
+
+Wetware Studio enhancements include:
+- Universal project compatibility auto-fixing
+- Next.js version management (automatic downgrade from v16 to v15)
+- Tailwind CSS v3/v4 auto-detection and configuration
+- Enhanced WebGL, Three.js, and WebGPU support
+- Smart PostCSS configuration handling
+- React version compatibility management
+- 20+ automatic compatibility fixes

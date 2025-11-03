@@ -87,8 +87,8 @@ export default function WebContainerPreview() {
         ref={iframeRef}
         title="WebContainer Preview"
         className="w-full h-full border-none"
-        sandbox="allow-scripts allow-forms allow-popups allow-modals allow-storage-access-by-user-activation allow-same-origin"
-        allow="cross-origin-isolated"
+        sandbox="allow-scripts allow-forms allow-popups allow-modals allow-storage-access-by-user-activation allow-same-origin allow-downloads allow-top-navigation-by-user-activation"
+        allow="cross-origin-isolated; webgl *; webgl2 *; webgpu *; accelerometer; gyroscope; magnetometer; autoplay; camera; microphone; clipboard-write; clipboard-read; fullscreen; encrypted-media; picture-in-picture"
         loading="eager"
         onLoad={notifyPreviewReady}
       />

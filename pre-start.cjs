@@ -16,11 +16,11 @@ let commitJson = {
 
 console.log(`
 ★═══════════════════════════════════════★
-          B O L T . D I Y
-         ⚡️  Welcome  ⚡️
+             B O L T . D I Y
+  Prompt, run, edit & deploy web apps
 ★═══════════════════════════════════════★
 `);
-console.log('📍 Current Version Tag:', `v${commitJson.version}`);
-console.log('📍 Current Commit Version:', commitJson.hash);
+console.log('📍 Version:', `v${commitJson.version}`);
+console.log('📍 Commit:', commitJson.hash);
 console.log('  Please wait until the URL appears here');
 console.log('★═══════════════════════════════════════★');

@@ -23,7 +23,8 @@ function makeNonInteractive(command: string): string {
     { pattern: /npx\s+([^@\s]+@?[^\s]*)\s+init/g, replacement: 'echo "y" | npx --yes $1 init --defaults --yes' },
     { pattern: /npx\s+create-([^\s]+)/g, replacement: 'npx --yes create-$1 --template default' },
     { pattern: /npx\s+([^@\s]+@?[^\s]*)\s+add/g, replacement: 'npx --yes $1 add --defaults --yes' },
-    { pattern: /npm\s+install(?!\s+--)/g, replacement: 'npm install --yes --no-audit --no-fund --silent' },
+    // Don't modify npm install if it already has flags like --legacy-peer-deps
+    { pattern: /npm\s+install\s*$/g, replacement: 'npm install --yes --no-audit --no-fund' },
     { pattern: /yarn\s+add(?!\s+--)/g, replacement: 'yarn add --non-interactive' },
     { pattern: /pnpm\s+add(?!\s+--)/g, replacement: 'pnpm add --yes' },
   ];
@@ -55,6 +56,19 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
       const scripts = packageJson?.scripts || {};
       const dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
 
+      // Check if this is a Next.js project
+      const isNextJsProject = dependencies['next'] !== undefined;
+      const nextVersion = dependencies['next'];
+
+      // Check if this is a project with modern dependencies
+      const hasModernDependencies =
+        isNextJsProject &&
+        (dependencies['@radix-ui/react-dialog'] ||
+         dependencies['@radix-ui/react-tabs'] ||
+         dependencies['lucide-react'] ||
+         dependencies['framer-motion'] ||
+         dependencies['three']);
+
       // Check if this is a shadcn project
       const isShadcnProject =
         hasFileContent('components.json', 'shadcn') ||
@@ -66,11 +80,18 @@ export async function detectProjectCommands(files: FileContent[]): Promise<Proje
       const availableCommand = preferredCommands.find((cmd) => scripts[cmd]);
 
       // Build setup command with non-interactive handling
-      let baseSetupCommand = 'npx update-browserslist-db@latest && npm install';
+      let baseSetupCommand = 'npm install';
 
-      // Add shadcn init if it's a shadcn project
-      if (isShadcnProject) {
-        baseSetupCommand += ' && npx shadcn@latest init';
+      // For Next.js 15+ or projects with modern dependencies, ensure proper configuration
+      if (hasModernDependencies || (isNextJsProject && nextVersion && (nextVersion.startsWith('15') || nextVersion.startsWith('16') || nextVersion === 'latest'))) {
+        // Install dependencies with legacy peer deps for compatibility
+        baseSetupCommand = 'npm install --legacy-peer-deps';
+      }
+
+      // Skip shadcn init for projects with modern dependencies as they already have components configured
+      // Only add shadcn init for projects without pre-configured components
+      if (isShadcnProject && !hasModernDependencies && !hasFile('components/ui')) {
+        baseSetupCommand += ' && npx --yes shadcn@latest init --defaults';
       }
 
       const setupCommand = makeNonInteractive(baseSetupCommand);

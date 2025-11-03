@@ -9,15 +9,16 @@
     const relevantProps = [
       'display', 'position', 'width', 'height', 'margin', 'padding',
       'border', 'background', 'color', 'font-size', 'font-family',
-      'text-align', 'flex-direction', 'justify-content', 'align-items'
+      'text-align', 'flex-direction', 'justify-content', 'align-items',
+      'transform', 'opacity', 'z-index', 'overflow', 'animation'
     ];
-    
+
     const styles = {};
     relevantProps.forEach(prop => {
       const value = computedStyles.getPropertyValue(prop);
       if (value) styles[prop] = value;
     });
-    
+
     return styles;
   }
 
@@ -176,21 +177,40 @@
   // Event handlers
   function handleMouseMove(e) {
     if (!isInspectorActive) return;
-    
+
     const target = e.target;
     if (!target || target === document.body || target === document.documentElement) return;
+
+    // Skip highlighting canvas elements to avoid interfering with WebGL/Three.js
+    if (target.tagName.toLowerCase() === 'canvas') {
+      // Highlight parent container instead
+      const parent = target.parentElement;
+      if (parent && parent !== document.body && parent !== document.documentElement) {
+        if (currentHighlight && currentHighlight !== parent) {
+          currentHighlight.classList.remove('inspector-highlight');
+        }
+        parent.classList.add('inspector-highlight');
+        currentHighlight = parent;
+        const elementInfo = createElementInfo(parent);
+        window.parent.postMessage({
+          type: 'INSPECTOR_HOVER',
+          elementInfo: elementInfo
+        }, '*');
+      }
+      return;
+    }
 
     // Remove previous highlight
     if (currentHighlight) {
       currentHighlight.classList.remove('inspector-highlight');
     }
-    
+
     // Add highlight to current element
     target.classList.add('inspector-highlight');
     currentHighlight = target;
 
     const elementInfo = createElementInfo(target);
-    
+
     // Send message to parent
     window.parent.postMessage({
       type: 'INSPECTOR_HOVER',

@@ -1,0 +1,22 @@
+# Don't include these in customer package
+.git
+.github
+node_modules
+dist
+build
+.next
+.cache
+*.log
+.env*
+!.env.example
+.DS_Store
+.vscode
+.idea
+*.zip
+*.tar.gz
+
+# Keep documentation
+!README.md
+!LICENSE
+!SETUP.md
+!V0_WRAPPER_README.md

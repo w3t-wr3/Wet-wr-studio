@@ -1,6 +1,7 @@
 import type { Message } from 'ai';
 import { generateId } from './fileUtils';
 import { detectProjectCommands, createCommandsMessage, escapeBoltTags } from './projectCommands';
+import { autoFixProject, createAutoFixMessage } from './projectAutoFixer';
 
 export const createChatFromFolder = async (
   files: File[],
@@ -26,8 +27,27 @@ export const createChatFromFolder = async (
     }),
   );
 
-  const commands = await detectProjectCommands(fileArtifacts);
+  // Auto-detect and fix project issues
+  const autoFixResult = await autoFixProject(fileArtifacts);
+
+  // Apply fixes to fileArtifacts
+  const fixedFileArtifacts = fileArtifacts.map((file) => {
+    const fix = autoFixResult.fixes.find((f) => f.path === file.path);
+    return fix ? { ...file, content: fix.content } : file;
+  });
+
+  const commands = await detectProjectCommands(fixedFileArtifacts);
+
+  // Use the auto-determined setup and start commands
+  if (commands.setupCommand && autoFixResult.setupCommand) {
+    commands.setupCommand = autoFixResult.setupCommand;
+  }
+  if (autoFixResult.startCommand) {
+    commands.startCommand = autoFixResult.startCommand;
+  }
+
   const commandsMessage = createCommandsMessage(commands);
+  const autoFixMessage = createAutoFixMessage(autoFixResult);
 
   const binaryFilesMessage =
     binaryFiles.length > 0
@@ -39,7 +59,7 @@ export const createChatFromFolder = async (
     content: `I've imported the contents of the "${folderName}" folder.${binaryFilesMessage}
 
 <boltArtifact id="imported-files" title="Imported Files" type="bundled" >
-${fileArtifacts
+${fixedFileArtifacts
   .map(
     (file) => `<boltAction type="file" filePath="${file.path}">
 ${escapeBoltTags(file.content)}
@@ -59,6 +79,11 @@ ${escapeBoltTags(file.content)}
   };
 
   const messages = [userMessage, filesMessage];
+
+  // Add auto-fix message if there were any fixes applied
+  if (autoFixMessage) {
+    messages.push(autoFixMessage);
+  }
 
   if (commandsMessage) {
     messages.push({
