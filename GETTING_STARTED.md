@@ -256,10 +256,40 @@ Wetware Studio needs AI to help you write code. You have two options:
 
 **Recommended Local AI Options:**
 
-#### 1. AnythingLLM (Easiest, Most Flexible)
+#### 1. LM Studio (Recommended - Easiest for Beginners)
 
 **What is it?**
-AnythingLLM is a desktop app that manages AI models for you. It can run models locally or connect to cloud services.
+LM Studio is a user-friendly desktop app for running AI models on your computer. It's the easiest way to get started with local AI.
+
+**Why we recommend it:**
+- ✅ Simple, beautiful interface
+- ✅ One-click model downloads
+- ✅ No command line needed
+- ✅ Built-in model search and management
+- ✅ Works great with Wetware Studio
+
+**Installation:**
+1. Go to [lmstudio.ai](https://lmstudio.ai/)
+2. Click "Download LM Studio"
+3. Install the app
+4. Open LM Studio
+5. Click the search icon (magnifying glass)
+6. Search for "Qwen2.5 Coder 7B"
+7. Download it (takes 10-30 minutes)
+8. Load the model and click "Start Server" (keep it running)
+
+**Full setup guide:** See [docs/LMSTUDIO.md](docs/LMSTUDIO.md)
+
+#### 2. AnythingLLM (Advanced - Most Flexible)
+
+**What is it?**
+AnythingLLM is a powerful desktop app that manages AI models for you. It can run models locally or connect to cloud services, and includes advanced features like RAG (document search) and workspaces.
+
+**Why use it:**
+- ✅ Multi-backend support (Ollama, LM Studio, cloud)
+- ✅ Advanced features (RAG, workspaces, document Q&A)
+- ✅ Can manage multiple models at once
+- ✅ More customization options
 
 **Installation:**
 1. Go to [useanything.com](https://useanything.com/)
@@ -276,23 +306,6 @@ AnythingLLM is a desktop app that manages AI models for you. It can run models l
   - **Codestral 22B** (22GB, best quality, needs more RAM)
 
 **Full setup guide:** See [docs/ANYTHINGLLM.md](docs/ANYTHINGLLM.md)
-
-#### 2. LM Studio (Great for Beginners)
-
-**What is it?**
-LM Studio is a user-friendly app for running AI models on your computer.
-
-**Installation:**
-1. Go to [lmstudio.ai](https://lmstudio.ai/)
-2. Click "Download LM Studio"
-3. Install the app
-4. Open LM Studio
-5. Click the search icon (magnifying glass)
-6. Search for "Qwen2.5 Coder 7B"
-7. Download it (takes 10-30 minutes)
-8. Click "Start Server" (keep it running)
-
-**Full setup guide:** See [docs/LMSTUDIO.md](docs/LMSTUDIO.md)
 
 ### Option B: Cloud AI (Easy, Fast, Costs Money)
 

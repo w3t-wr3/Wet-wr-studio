@@ -111,16 +111,18 @@ Open **http://localhost:5173** in your browser.
 
 #### AI Provider Options
 
-**Option 1: AnythingLLM (Recommended - Most Flexible)**
+**Option 1: LM Studio (⭐ Recommended - Easiest Setup)**
+- 100% local, no API keys needed
+- Simple, beginner-friendly interface
+- One-click model downloads
+- Recommended model: **Qwen2.5 Coder 7B**
+- [📖 LM Studio Setup Guide](docs/LMSTUDIO.md)
+
+**Option 2: AnythingLLM (Advanced - Most Flexible)**
 - 100% local with multi-model support
 - Works with Ollama, LM Studio, or cloud providers
 - Built-in document RAG and workspace management
 - [📖 AnythingLLM Setup Guide](docs/ANYTHINGLLM.md)
-
-**Option 2: LM Studio (Recommended for Privacy & No Cost)**
-- 100% local, no API keys needed
-- Recommended model: **Qwen3 Coder 30B**
-- [📖 LM Studio Setup Guide](docs/LMSTUDIO.md)
 
 **Option 3: Cloud Providers**
 - Add API keys to `.env.local` for providers like OpenAI, Anthropic, etc.
