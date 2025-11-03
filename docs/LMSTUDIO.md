@@ -9,9 +9,28 @@ Wetware Studio works great with LM Studio for local AI inference. This guide wil
 - ✅ **No Cost** - No API usage fees
 - ✅ **Powerful** - Run models like Qwen3 Coder 30B locally
 
-## Recommended Model
+## Recommended Models (Choose Based on Your RAM)
 
-**Qwen3 Coder 30B** - A powerful 30B MoE (Mixture of Experts) coding model from Alibaba Qwen, designed specifically for code generation and understanding.
+**Important:** Choose a model that fits your system's RAM to avoid "failed to allocate buffer for kv cache" errors.
+
+### For 4-8GB RAM Systems:
+- **Qwen2.5-Coder-1.5B-Instruct** (Q4_K_M) - ~1.5GB
+- **Qwen2.5-Coder-3B-Instruct** (Q4_K_M) - ~3GB
+- **DeepSeek-Coder-1.3B-Instruct** (Q4_K_M) - ~1.3GB
+
+### For 8-16GB RAM Systems (Most Common):
+- **Qwen2.5-Coder-7B-Instruct** (Q4_K_M) - ~4.4GB ⭐ **RECOMMENDED**
+- **DeepSeek-Coder-6.7B-Instruct** (Q4_K_M) - ~4GB
+
+### For 16-32GB RAM Systems:
+- **Qwen2.5-Coder-14B-Instruct** (Q4_K_M) - ~8.5GB
+- **DeepSeek-Coder-V2-16B-Instruct** (Q4_K_M) - ~9.5GB
+
+### For 32GB+ RAM Systems:
+- **Qwen3 Coder 30B** (Q4_K_M) - ~19GB
+- **Codestral-22B-v0.1** (Q4_K_M) - ~13GB
+
+**Not sure which to choose?** Start with **Qwen2.5-Coder-7B-Instruct (Q4_K_M)** - it works well on most systems.
 
 ## Installation Steps
 
@@ -19,31 +38,36 @@ Wetware Studio works great with LM Studio for local AI inference. This guide wil
 
 Download and install LM Studio from [lmstudio.ai](https://lmstudio.ai/)
 
-### 2. Search for Qwen3 Coder 30B
+### 2. Search for Your Model
 
 1. **Open LM Studio**
 2. **Click the Search icon** (magnifying glass) in the left sidebar
-3. **Type** `qwen3 coder` in the search box
-4. **Look for**: `qwen/qwen3-coder-30b`
+3. **Type the model name** from the list above (e.g., `Qwen2.5-Coder-7B-Instruct`)
 
 ![LM Studio Model Search](lmstudio-search.png)
 
 ### 3. Download the Model
 
-1. **Click** on `qwen/qwen3-coder-30b` from the search results
-2. **Select a quantization**:
-   - **Recommended**: `Qwen3-Coder-30B-A3B-Inst...` (GGUF format)
-   - Choose based on your available RAM (126K or 187K variants)
+1. **Click** on the model from the search results
+2. **Select the Q4_K_M quantization** specifically:
+   - Look for files ending in `Q4_K_M.gguf`
+   - **Q4_K_M** is the recommended quantization (best balance of quality vs size)
+   - Avoid Q8, Q6, Q5 if you have limited RAM
 3. **Click Download**
-4. Wait for download to complete (model is ~18-20GB)
+4. Wait for download to complete (size varies by model - 1.5GB to 20GB)
 
 ### 4. Load the Model
 
 1. **Go to** "LM Runtime" tab in the left sidebar
 2. **Click** "Select a model to load"
-3. **Choose** `qwen/qwen3-coder-30b` from your downloaded models
+3. **Choose** your downloaded model from the list
 4. **Click** "Load Model"
-5. Wait for the model to load into memory
+5. Wait for the model to load into memory (10-30 seconds)
+
+**If you see "Failed to allocate buffer for kv cache":**
+- Your model is too large for your RAM
+- Go back to step 2 and download a smaller model
+- Or reduce context length in model settings (try 2048 or 4096)
 
 ### 5. Start the Local Server
 
@@ -72,9 +96,25 @@ LMSTUDIO_API_BASE_URL=http://127.0.0.1:1234
 
 ## Troubleshooting
 
-### Model Not Loading
-- **Check RAM**: Qwen3 Coder 30B requires at least 32GB RAM (16GB+ available)
-- **Try smaller quantization**: If model fails to load, try a more compressed variant
+### "Failed to allocate buffer for kv cache"
+**This is the most common error!**
+
+**Cause:** Model + context window is too large for your RAM.
+
+**Solutions (try in order):**
+1. **Download a smaller model** - See recommended models section above
+2. **Reduce context length:**
+   - Go to model settings (gear icon)
+   - Change "Context Length" to 2048 or 4096
+   - Click "Reload Model"
+3. **Use Q4_K_M quantization** instead of Q8/Q6
+4. **Close other applications** to free RAM
+5. **Restart your computer** to clear memory
+
+### Model Not Loading (Other Reasons)
+- **Check available RAM**: Open Task Manager (Windows) or Activity Monitor (Mac)
+- **Model file corrupt**: Try re-downloading
+- **LM Studio outdated**: Update to latest version
 
 ### Connection Failed
 - **Verify LM Studio is running**: Check the "LM Runtime" tab shows the model as loaded
