@@ -85,7 +85,7 @@ pnpm dev
 - **Framework**: [Remix](https://remix.run/)
 - **Build**: [Vite](https://vitejs.dev/)
 - **Runtime**: [WebContainer API](https://webcontainers.io/)
-- **AI SDK**: [Vercel AI SDK](https://sdk.vercel.ai/)
+- **AI Integration**: [Vercel AI SDK](https://sdk.vercel.ai/) (supports 20+ providers including LM Studio)
 - **Styling**: [UnoCSS](https://unocss.dev/)
 - **Base**: [bolt.diy](https://github.com/stackblitz-labs/bolt.diy)
 
