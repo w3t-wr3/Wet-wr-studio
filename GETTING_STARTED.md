@@ -377,8 +377,10 @@ ANYTHINGLLM_API_BASE_URL=http://localhost:3001
 
 **For LM Studio:**
 ```bash
-LMSTUDIO_API_BASE_URL=http://localhost:1234
+LMSTUDIO_API_BASE_URL=http://127.0.0.1:1234
 ```
+
+> **Note:** Use `127.0.0.1` instead of `localhost` to avoid IPv6 issues on some systems.
 
 **Step 4:** Save and close the file
 
@@ -916,8 +918,8 @@ pnpm dev
 # AnythingLLM:
 ANYTHINGLLM_API_BASE_URL=http://localhost:3001
 
-# LM Studio:
-LMSTUDIO_API_BASE_URL=http://localhost:1234
+# LM Studio (use 127.0.0.1 to avoid IPv6 issues):
+LMSTUDIO_API_BASE_URL=http://127.0.0.1:1234
 ```
 
 **Cloud AI:**
