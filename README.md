@@ -46,29 +46,41 @@ pnpm install
 
 #### Step 3: Configure Environment
 
+**You have two options:**
+
+**Option A: Use Local AI (No API Keys Needed)**
+
+1. First, copy the example environment file:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. Edit `.env.local` and add your local AI provider:
+   ```bash
+   # AnythingLLM (recommended)
+   ANYTHINGLLM_API_BASE_URL=http://localhost:3001
+
+   # OR LM Studio
+   LMSTUDIO_API_BASE_URL=http://localhost:1234
+   ```
+
+3. Make sure your local AI is running (AnythingLLM or LM Studio)
+
+**Option B: Use Cloud Providers (API Keys Required)**
+
+Just add your API key directly to the `.env.local` file:
+
 ```bash
-# Copy the example environment file
-cp .env.example .env.local
+# Create .env.local file
+echo "OPENAI_API_KEY=sk-your-key-here" > .env.local
+
+# OR for Anthropic
+echo "ANTHROPIC_API_KEY=sk-ant-your-key-here" > .env.local
+
+# OR for any other provider - see .env.example for all options
 ```
 
-**Edit `.env.local` and add your AI provider settings:**
-
-For local AI (no API keys needed):
-```bash
-# AnythingLLM (recommended)
-ANYTHINGLLM_API_BASE_URL=http://localhost:3001
-
-# OR LM Studio
-LMSTUDIO_API_BASE_URL=http://localhost:1234
-```
-
-For cloud providers (add API keys):
-```bash
-OPENAI_API_KEY=sk-...
-# OR
-ANTHROPIC_API_KEY=sk-ant-...
-# See .env.example for all options
-```
+> **Note:** For cloud providers, you don't need to copy `.env.example` - just create `.env.local` with your API key!
 
 #### Step 4: Start the Development Server
 
