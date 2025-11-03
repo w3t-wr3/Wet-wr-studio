@@ -60,9 +60,8 @@ pnpm dev
 
 1. **Import any project folder** via the UI
 2. Auto-fixes are applied automatically
-3. Run `npm install --legacy-peer-deps` (suggested automatically)
-4. Run `npm run dev` (suggested automatically)
-5. **Preview works instantly** ✨
+3. Dependencies install and dev server starts automatically
+4. **Preview works instantly** ✨
 
 ### Key Enhancements
 
