@@ -16,7 +16,7 @@ let commitJson = {
 
 console.log(`
 ★═══════════════════════════════════════★
-             B O L T . D I Y
+        W E T W A R E   S T U D I O
   Prompt, run, edit & deploy web apps
 ★═══════════════════════════════════════★
 `);
