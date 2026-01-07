@@ -107,8 +107,12 @@ export default function GitCloneButton({ importChat, className }: GitCloneButton
 
           // For static HTML projects, include image files as base64
           if (isStaticHtml && isImageFile && content instanceof Uint8Array) {
-            // Convert binary to base64 for transmission
-            const base64Content = btoa(String.fromCharCode(...Array.from(content)));
+            // Convert binary to base64 for transmission (avoid stack overflow with large files)
+            let binaryString = '';
+            for (let i = 0; i < content.length; i++) {
+              binaryString += String.fromCharCode(content[i]);
+            }
+            const base64Content = btoa(binaryString);
             totalSize += content.length;
             fileContents.push({
               path: filePath,
